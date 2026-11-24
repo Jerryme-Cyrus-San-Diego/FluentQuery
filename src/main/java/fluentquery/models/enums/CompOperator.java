@@ -1,5 +1,8 @@
-package fluentquery.builder.models.enums;
+package fluentquery.models.enums;
 
+/**
+ * An enumeration that represents the comparators in SQL
+ */
 public enum CompOperator {
 	EQUAL,
 	GREATER_THAN,

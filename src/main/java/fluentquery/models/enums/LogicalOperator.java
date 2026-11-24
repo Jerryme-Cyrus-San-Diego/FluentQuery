@@ -1,4 +1,4 @@
-package fluentquery.builder.models.enums;
+package fluentquery.models.enums;
 
 public enum LogicalOperator {
 	AND, OR, NOT
