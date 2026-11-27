@@ -6,25 +6,31 @@ import fluentquery.models.enums.LogicalOperator;
 /**
  * This class represents the boolean expression in the WHERE clause or any clauses
  * that need a boolean expression
- * @see Expression.Comparison
+ * @see ColToValComparison
  * @see Expression.LogicalExpression
  */
 public sealed interface Expression
-		permits Expression.Comparison, Expression.LogicalExpression {
+		permits Expression.ColumnComparison, Expression.ColToValComparison, Expression.LogicalExpression {
 
 	/**
 	 * Represents the single unit of boolean expression:
 	 * {@snippet : WHERE a >= b}
 	 * or
 	 * {@snippet : WHERE a != b}
-	 * @param column the column that will be compared
+	 * @param column the table that will be compared
 	 * @param operator the operator that will be used
-	 * @param val the value to compare the column to
+	 * @param val the value to compare the table to
 	 */
-	record Comparison(
+	record ColToValComparison(
 			Column column,
 			CompOperator operator,
 			Value val
+	) implements Expression {}
+
+	record ColumnComparison(
+			Column col1,
+			CompOperator operator,
+			Column col2
 	) implements Expression {}
 
 	/**

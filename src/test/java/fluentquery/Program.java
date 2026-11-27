@@ -7,6 +7,6 @@ public class Program {
 	public static void main(String[] args) {
 		var repo = new PersonRepository();
 
-		System.out.println(repo.getPeople());
+		for (var r : repo.getPeople()) System.out.println(r);
 	}
 }

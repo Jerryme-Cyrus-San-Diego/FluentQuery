@@ -1,34 +1,25 @@
 package fluentquery;
 
-import fluentquery.models.enums.SortingDirection;
-import fluentquery.query.SelectQuery;
 import fluentquery.models.Column;
-import fluentquery.models.Expression;
-import fluentquery.models.Table;
-import fluentquery.models.Value;
-import fluentquery.models.enums.CompOperator;
+import fluentquery.query.SelectQuery;
 import fluentquery.query.builder.SelectQueryBuilder;
+import fluentquery.query.reader.AbstractQueryReader;
+import fluentquery.query.reader.SelectQueryReader;
+import fluentquery.query.reader.reflect.SelectReflector;
 
 import java.util.List;
 
 public class Main {
-
 	public static void main(String[] args) {
+		AbstractQueryReader<SelectQuery> sqr = new SelectQueryReader<Package>();
+		var sqb = SelectQueryBuilder
+				.builder()
+				.select(List.of("name", "age"))
+				.from("people")
+				.build();
 
-		SelectQuery queryBuilder =
-				SelectQueryBuilder
-						.builder()
-						.select(List.of("name", "age"))
-						.from(Table.class)
-						.where(new Expression.Comparison(
-								new Column("age"),
-								CompOperator.GREATER_THAN_OR_EQUAL,
-								new Value(18)
-						))
-						.orderBy(new Column("age"))
-						.limit(30)
-						.build();
+		var s = sqr.toSqlQuery(sqb);
 
-		System.out.println(queryBuilder);
+		System.out.println(s);
 	}
 }

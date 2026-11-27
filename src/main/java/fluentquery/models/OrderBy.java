@@ -4,7 +4,7 @@ import fluentquery.models.enums.SortingDirection;
 
 /**
  * Represents the ORDER BY clause
- * @param column the column to base the order
+ * @param column the table to base the order
  * @param direction the direction of the sort (ascending or descending)
  */
 public record OrderBy(Column column, SortingDirection direction) {
